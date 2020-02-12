@@ -46,7 +46,7 @@
  */
 #}
 <div class="layout-container">
-	<div class="container">
+    <div class="container">
 	<header role="banner" class="section-header">
 		<div class="row">
 			<div class="logo col-md-6 col-sm-6 col-xs-12">
@@ -59,51 +59,45 @@
 	</header>
     </div>
 
-  	<div class="navigation-wrapper">
-			<div class="navigation">
-				{{ page.navigation }}
-			</div>
+	<div class="navigation-wrapper">
+		<div class="navigation">
+			{{ page.navigation }}
+		</div>
 	</div>
     <div class="container">
-		{% if page.breadcrumb %}
-			{{ page.breadcrumb }}
+	{% if page.breadcrumb %}
+		{{ page.breadcrumb }}
+	{% endif %}
+	{% if page.highlighted %}
+		{{ page.highlighted }}
+	{% endif %}
+	{% if page.help %}
+		{{ page.help }}
+	{% endif %}
+
+	{% set sidebarClass = 'col-md-12' %}
+		{% if page.sidebar_first %}
+			{% set sidebarClass = 'col-md-8 col-sm-8' %}
 		{% endif %}
-
-		{% if page.highlighted %}
-  		{{ page.highlighted }}
-  	{% endif %}
-
-		{% if page.help %}
-  		{{ page.help }}
-  	{% endif %}
-
-		{% set sidebarClass = 'col-md-12' %}
+		{% if page.sidebar_second %}
+			{% set sidebarClass = 'col-md-8 col-sm-8' %}
+		{% endif %}
+		{% if page.sidebar_second %}
 			{% if page.sidebar_first %}
-				{% set sidebarClass = 'col-md-8 col-sm-8' %}
+		  	{% set sidebarClass = 'col-md-4 col-sm-4' %}
 			{% endif %}
-			{% if page.sidebar_second %}
-				{% set sidebarClass = 'col-md-8 col-sm-8' %}
-			{% endif %}
-			{% if page.sidebar_second %}
-				{% if page.sidebar_first %}
-			  	{% set sidebarClass = 'col-md-4 col-sm-4' %}
-				{% endif %}
-			{% endif %}
-
-  	<main role="main">
-	  	<div class="row">
-
-				<a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-
-	    	<div class="layout-content {{ sidebarClass }}">
-	      	{{ page.content }}
-	    	</div>{# /.layout-content #}
-
-	    	{% if page.sidebar_first %}
-	      	<aside class="layout-sidebar-first col-md-4 col-sm-4" role="complementary">
-	        	{{ page.sidebar_first }}
-	      	</aside>
-	    	{% endif %}
+		{% endif %}
+	<main role="main">
+	<div class="row">
+		<a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+	<div class="layout-content {{ sidebarClass }}">
+	{{ page.content }}
+	</div>{# /.layout-content #}
+	{% if page.sidebar_first %}
+		<aside class="layout-sidebar-first col-md-4 col-sm-4" role="complementary">
+	{{ page.sidebar_first }}
+	</aside>
+	{% endif %}
 
 	    	{% if page.sidebar_second %}
 	      	<aside class="layout-sidebar-second col-md-4 col-sm-4" role="complementary">
@@ -140,4 +134,5 @@
 			</div>
 		</footer>
 	</div>
-</div>{# /.layout-container #}
+</div>
+
